@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Roma City RP</title>
+    <link rel="stylesheet" href="style/main.css">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="script/main.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body x-data="Main()" x-init="listen">
+
+    <!-- Background video Start-->
+    <div id="video-container">
+        <iframe src="https://www.youtube.com/embed/MsDD0x0RMhI?vq=hd1080&autoplay=1&loop=1&mute=1&modestbranding=1&rel=0&iv_load_policy=3&color=white&controls=0&disablekb=1&playlist=MsDD0x0RMhI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <img id="cursor" class="w-[28px] absolute z-[1000] pointer-events-none scale-110" src="/html/img/cursor.png">
+
+    <!-- Background video End -->
+    <div class="container">
+        <!-- Navigation Start -->
+        <nav class="flex items-center mb-20">
+            <img src="img/logo.png" alt="" class="mr-10">
+            <template x-for="button in buttons">
+                <div class="button px-5 py-2 rounded-md ml-3 font-medium text-sm" :class="button.selected ? 'selected':''"
+                    x-text="button.label" @click="button.selected = selectBtn(button.selected)">Home</div>
+            </template>
+        </nav>
+        <!-- Navigation End -->
+
+        <!-- Home Start -->
+        <div class="home relative" x-show="buttons[0].selected" x-transition:enter.duration.1000ms>
+            <div class=" text-[#ff7b00] text-4xl max-w-3xl font-semibold mb-5 min-[1024px]:w-[700px] min-[2550px]:w-fit leading-normal">
+                Un progetto con nuove opportunità
+            </div>
+            <div class="text-white max-w-4xl text-2xl font-medium min-[1024px]:w-[600px] min-[2550px]:w-fit mb-6">
+                Un'esperienza di gioco equilibrata porterà solo emozioni positive.</div>
+            <div
+                class="text-[#e8e8e8] max-w-4xl text-lg font-normal min-[1024px]:w-[600px] min-[2550px]:w-fit sub-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit. 🎃</div>
+
+            <!-- Discord Widget Start -->
+            <div class="dcdiv w-fit p-5 rounded-xl mt-10 flex gap-5 items-center ">
+                <div class="w-[80px] h-[80px] rounded-xl flex justify-center">
+                    <img class="w-[30px]" src="img/discord-logo.svg" alt="Discord Logo">
+                </div>
+                <div>
+                    <div class="text-xl text-white font-medium">Roma City RP</div>
+                    <div class="text-[#e8e8e8] sub-text" x-text="memberCount + ' online members'"></div>
+                </div>
+                <a class="cursor-none sub-text bg-[#ff7b00] hover:bg-[#8284EE] text-sm font-medium inline-flex gap-2 px-4 py-2 rounded-md text-white uppercase ml-10 transition duration-300 ease-in-out"
+                    :href="DiscordInviteLink" target="_blank"
+                    @click="window.invokeNative('openUrl', DiscordInviteLink);">Connect <img src="img/arrow.svg" alt=""
+                        x-transition></a>
+            </div>
+            <!-- Discord Widget End -->
+
+                   <!-- Social Media Start -->
+            <div class="flex flex-row gap-2 absolute min-[1024px]:-bottom-72 min-[2550px]:-bottom-[620px]">
+            <a  :href="FacebookLink" target="_blank"
+            @click="window.invokeNative('openUrl', FacebookLink);" class=" dcdiv p-4 rounded-lg text-white hover:bg-[#ff7b00] cursor-none">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.6023 0.21167C5.33351 0.21167 0.204514 5.32926 0.204514 11.6322C0.204514 17.3311 4.3761 22.0613 9.82422 22.9161V14.9376H6.9292V11.6322H9.82422V9.11333C9.82422 6.25248 11.5225 4.67959 14.1326 4.67959C15.3749 4.67959 16.6743 4.89614 16.6743 4.89614V7.7114H15.2382C13.8248 7.7114 13.3803 8.58902 13.3803 9.48947V11.6322H16.5489L16.036 14.9376H13.3803V22.9161C16.0661 22.4917 18.5118 21.1214 20.2758 19.0522C22.0398 16.983 23.0062 14.3513 23 11.6322C23 5.32926 17.871 0.21167 11.6023 0.21167Z" fill="white"/>
+                </svg>
+                
+        </a>
+            <a  :href="InstagramLink" target="_blank"
+            @click="window.invokeNative('openUrl', InstagramLink);" class=" dcdiv p-4 rounded-lg text-white hover:bg-[#ff7b00] cursor-none">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_1430_110)">
+                <path d="M11.5227 2.21979C14.5993 2.21979 14.9642 2.23132 16.1798 2.287C19.3025 2.42913 20.761 3.91075 20.9032 7.01037C20.9589 8.22506 20.9694 8.58994 20.9694 11.6665C20.9694 14.744 20.9579 15.108 20.9032 16.3227C20.7602 19.4194 19.3053 20.9038 16.1798 21.046C14.9642 21.1017 14.6012 21.1132 11.5227 21.1132C8.44616 21.1132 8.08127 21.1017 6.86659 21.046C3.73625 20.903 2.28534 19.4146 2.14323 16.3217C2.08754 15.107 2.07602 14.7431 2.07602 11.6656C2.07602 8.58898 2.08849 8.22506 2.14323 7.00941C2.28631 3.91076 3.74105 2.42816 6.86659 2.28605C8.08224 2.23132 8.44616 2.21979 11.5227 2.21979ZM11.5227 0.142822C8.39335 0.142822 8.00158 0.156265 6.77248 0.211959C2.58781 0.404005 0.262142 2.72584 0.0700966 6.91435C0.0134432 8.1444 0 8.53618 0 11.6656C0 14.7949 0.0134432 15.1877 0.0691364 16.4168C0.261182 20.6014 2.58302 22.927 6.77153 23.1191C8.00158 23.1748 8.39335 23.1883 11.5227 23.1883C14.6521 23.1883 15.0448 23.1748 16.2739 23.1191C20.4548 22.927 22.7862 20.6052 22.9753 16.4168C23.032 15.1877 23.0455 14.7949 23.0455 11.6656C23.0455 8.53618 23.032 8.1444 22.9763 6.91531C22.7882 2.73448 20.4634 0.404964 16.2749 0.212919C15.0448 0.156265 14.6521 0.142822 11.5227 0.142822ZM11.5227 5.74863C8.25508 5.74863 5.60581 8.3979 5.60581 11.6656C5.60581 14.9332 8.25508 17.5835 11.5227 17.5835C14.7904 17.5835 17.4397 14.9342 17.4397 11.6656C17.4397 8.3979 14.7904 5.74863 11.5227 5.74863ZM11.5227 15.5065C9.40159 15.5065 7.68182 13.7877 7.68182 11.6656C7.68182 9.54441 9.40159 7.82465 11.5227 7.82465C13.6439 7.82465 15.3636 9.54441 15.3636 11.6656C15.3636 13.7877 13.6439 15.5065 11.5227 15.5065ZM17.6739 4.13257C16.9096 4.13257 16.2903 4.75191 16.2903 5.5153C16.2903 6.27868 16.9096 6.89802 17.6739 6.89802C18.4374 6.89802 19.0556 6.27868 19.0556 5.5153C19.0556 4.75191 18.4374 4.13257 17.6739 4.13257Z" fill="white"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_1430_110">
+                <rect width="23.0455" height="23.0455" fill="white" transform="translate(0 0.142822)"/>
+                </clipPath>
+                </defs>
+                </svg>
+                
+        </a>
+            <a  :href="TikTokLink" target="_blank"
+            @click="window.invokeNative('openUrl', TikTokLink);" class=" dcdiv p-4 rounded-lg text-white hover:bg-[#ff7b00] cursor-none">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.2275 4.91888C19.0724 4.83864 18.9212 4.75069 18.7747 4.65535C18.3489 4.37383 17.9585 4.04212 17.6119 3.66736C16.7446 2.67505 16.4207 1.66838 16.3014 0.963556H16.3062C16.2065 0.378523 16.2477 0 16.254 0H12.3039V15.2741C12.3039 15.4792 12.3039 15.6819 12.2953 15.8821C12.2953 15.9071 12.2929 15.9301 12.2915 15.9569C12.2915 15.9679 12.2915 15.9794 12.2891 15.9909V15.9995C12.2474 16.5476 12.0718 17.077 11.7775 17.5412C11.4832 18.0053 11.0794 18.3901 10.6015 18.6616C10.1035 18.9449 9.54018 19.0937 8.96716 19.0928C7.12678 19.0928 5.63521 17.5921 5.63521 15.7389C5.63521 13.8856 7.12678 12.3849 8.96716 12.3849C9.31556 12.3846 9.66177 12.4394 9.99301 12.5473L9.99781 8.52538C8.99226 8.3955 7.9707 8.4754 6.99759 8.76008C6.02449 9.04476 5.12092 9.52802 4.34393 10.1794C3.6631 10.7709 3.09071 11.4768 2.65255 12.2651C2.48581 12.5526 1.85669 13.7078 1.78051 15.5827C1.7326 16.6469 2.05218 17.7493 2.20455 18.2051V18.2146C2.30038 18.483 2.67172 19.3986 3.27687 20.1705C3.76485 20.7897 4.34137 21.3336 4.9879 21.7847V21.775L4.99747 21.7847C6.90973 23.0842 9.02993 22.9989 9.02993 22.9989C9.39697 22.984 10.6264 22.9989 12.0227 22.3372C13.5712 21.6037 14.4529 20.5106 14.4529 20.5106C15.0161 19.8577 15.4639 19.1135 15.7772 18.3099C16.1347 17.3703 16.254 16.2434 16.254 15.793V7.68976C16.3019 7.71852 16.9401 8.14063 16.9401 8.14063C16.9401 8.14063 17.8596 8.72998 19.2942 9.11378C20.3233 9.38688 21.7099 9.44439 21.7099 9.44439V5.52307C21.2242 5.57578 20.2375 5.42245 19.2275 4.91888Z" fill="white"/>
+                </svg>
+                
+        </a>
+
+        </div>
+        <!-- Social Media End -->
+
+        </div>
+        <!-- Home End -->
+
+        <!-- News Start -->
+        <div x-show="buttons[1].selected" x-transition:enter.duration.1000ms>
+            <div class="text-white text-4xl font-medium mb-5 ">News</div>
+            <div class="sub-text text-white/60 max-w-4xl text-lg  font-normal mb-8 min-[1024px]:w-[700px] min-[2550px]:w-fit">
+                Here you will find the hottest updates about the project and more. Stay tuned for the latest news and updates.</div>
+
+            <div class="w-fit h-[600px] overflow-y-auto rounded-xl flex flex-col gap-5 sub-text">
+                <template x-for="news in feed">
+                    <div class="dcdiv p-5 w-fit h-fit rounded-xl hover:bg-black/30 transition duration-300 ease-in-out">
+                        <span class="text-white font-medium text-xl" x-text="news.label"></span>
+                        <div class="text-[#e8e8e8] w-[600px] mb-3 mt-2" x-text="news.desc"></div>
+                        <img class="w-full rounded-xl" :src="news.img" alt="">
+                        <div class="inline-flex gap-3">
+                            <div class="text-sm text-white bg-black/30 rounded-md mt-4 w-fit px-3 py-1.5"
+                                x-text="news.date"></div>
+                            <div class="text-sm text-white bg-[#ff7b00] rounded-md mt-4 w-fit px-3 py-1.5"
+                                x-text="news.author"></div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <!-- News End -->
+
+        <!-- Team Start -->
+        <div class="team" x-show="buttons[2].selected" x-transition:enter.duration.1000ms>
+            <div class="text-white text-4xl font-medium mb-5">Team</div>
+            <div
+                class="sub-text text-white/60 max-w-4xl text-lg  font-normal mb-8 min-[1024px]:w-[700px] min-[2550px]:w-fit">
+                Meet our talented team working on the project. Here are some of our key members and their roles.</div>
+            <div class="inline-flex flex-wrap w-[600px] gap-3 overflow-y-auto h-[630px]">
+                <template x-for="member in team">
+                    <div class="dcdiv member h-fit w-fit px-8 py-5 rounded-xl hover:bg-[#ff7b00] transition duration-300 ease-in-out"
+                        @click="copyToClipboard(member.discord)">
+                        <img draggable="false" class="w-48 mb-5" :src="member.img" alt="">
+                        <div class="discord text-xl text-white" x-text="member.discord"></div>
+                        <div class="role text-md sub-text text-white/60" x-text="member.role"></div>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <!-- Team End -->
+
+        <!-- News Start -->
+        <div x-show="buttons[3].selected" x-transition:enter.duration.1000ms>
+            <div class="text-white text-4xl font-medium mb-5 ">Rules</div>
+            <div
+                class="sub-text text-white/60 max-w-4xl text-lg  font-normal mb-8 min-[1024px]:w-[700px] min-[2550px]:w-fit">
+                Please be aware that compliance with specific rules and guidelines is mandatory when participating in this project. Ignorance of these rules will not exempt you from responsibility.
+            </div>
+
+            <div class="w-fit h-[600px] overflow-y-auto rounded-xl flex flex-col gap-2 sub-text">
+                <template x-for="rules in list">
+                    <div class="dcdiv p-5 w-fit h-fit flex flex-row gap-2 rounded-xl hover:bg-black/30 transition duration-300 ease-in-out">
+                        <span class="text-white" x-text="rules.number"></span>
+                        <div class="text-[#e8e8e8] w-[600px]" x-text="rules.desc"></div>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <!-- News End -->
+    </div>
+    </div>
+    <div class="bg1" style="background-image: url(img/about-img.png)" x-show="buttons[0].selected"
+        x-transition:enter.duration.800ms x-transition:leave.duration.300ms></div>
+    <div class="bg1" style="background-image: url(img/news-img.png)" x-show="buttons[1].selected"
+        x-transition:enter.duration.800ms x-transition:leave.duration.300ms></div>
+    <div class="bg1" style="background-image: url(img/team-img.png)" x-show="buttons[2].selected"
+        x-transition:enter.duration.800ms x-transition:leave.duration.300ms></div>
+    <div class="bg1" style="background-image: url(img/rules-img.png)" x-show="buttons[3].selected"
+        x-transition:enter.duration.800ms x-transition:leave.duration.300ms></div>
+
+    <div class="dcdiv music-container" :class="musicOpen ? 'active':''">
+        <img draggable="false" src="img/music.png" alt="">
+        <div class="circle" @click="musicOpen = !musicOpen">
+            <div class="bar1"></div>
+            <div class="bar2" :class="musicOpen ? 'active':''"></div>
+        </div>
+        <div class="visualizer">
+            <div class="bar" :class="isMusicPlaying ? 'active':''"></div>
+            <div class="bar" :class="isMusicPlaying ? 'active2':''"></div>
+            <div class="bar" :class="isMusicPlaying ? 'active3':''"></div>
+        </div>
+        <div class="info" x-show="musicOpen" x-transition:enter.duration.1600ms x-transition:leave.duration.50ms>
+            <div>
+                <div class="label font-normal text-xl" x-text="musicList[currentSong].label"></div>
+                <div class="sub-text author truncate w-44" x-text="musicList[currentSong].author"></div>
+                <img draggable="false" src="img/back.svg" alt="" class="back" @click="prev()">
+                <img draggable="false" src="img/pause.svg" alt="" class="pause" x-show="isMusicPlaying"
+                    @click="pause()">
+                <img draggable="false" src="img/play.svg" alt="" class="play" x-show="!isMusicPlaying" @click="play()">
+                <img draggable="false" src="img/forward.svg" alt="" class="forward" @click="next()">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
