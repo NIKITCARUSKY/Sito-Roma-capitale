@@ -1,6 +1,7 @@
 let audio = new Audio();
 var request = new XMLHttpRequest();
 var count = 0;
+    console.log("ciao");
 console.log("ciao");
 function Main(){
     return{
