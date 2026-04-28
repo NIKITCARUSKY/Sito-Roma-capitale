@@ -2,7 +2,6 @@ let audio = new Audio();
 var request = new XMLHttpRequest();
 var count = 0;
 console.log("ciao");
-function = request
 function Main(){
     return{
         DiscordGuildId: '1394320024822612048', // Also know as Discord server ID [ENABLE DISCORD WIDGET ON YOUR DISCORD SERVER!]
